@@ -41,7 +41,15 @@
 	  console.log('you dropped something on me')
   
 	  let currentPiece = event.dataTransfer.getData('text/plain')
+	  // I started by wondering why does it take more than one image, then I saw that you were using the event.target to get access to the each puzzle box, so I decided to console.log the event and found information about the targeted tag so I made a condition to only allow the image drop if the puzzle board has no children and only if it wasn't an image tag, because the first condition made it possible for user to put more than one image inside of each other so I excluded that option.
+	  if (
+		event.target.children.length === 0 &&
+		!event.target.classList.contains('puzzle-image')
+	  ) {
 		event.target.appendChild(document.querySelector(`#${currentPiece}`))
+	  } else {
+		return
+	  }
 	}
   
 	// add some event handling for the nav navButtons
